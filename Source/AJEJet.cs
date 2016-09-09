@@ -398,9 +398,6 @@ namespace AJE
 
         private void SetStaticSimulation()
         {
-            CreateEngineIfNecessary();
-
-            FitEngineIfNecessary();
             ambientTherm = new EngineThermodynamics();
             ambientTherm.FromStandardConditions(true);
 
