@@ -7,12 +7,11 @@ using System.Text;
 using UnityEngine;
 using System.Reflection;
 using SolverEngines;
-using SolverEngines.EngineFitting;
 
 namespace AJE
 {
 
-    public class ModuleEnginesAJEJet : ModuleEnginesSolver, IModuleInfo, IEngineStatus, IFittableEngine
+    public class ModuleEnginesAJEJet : ModuleEnginesSolver, IModuleInfo, IEngineStatus
     {
         [EngineFitResult]
         [KSPField(isPersistant = false, guiActive = false)]
@@ -269,15 +268,13 @@ namespace AJE
 
         #region Engine Fitting
 
-        public bool CanFitEngine => true;
-
-        public void PushFitParamsToSolver()
+        public override void PushFitParamsToSolver()
         {
             (engineSolver as SolverJet).SetFitParams(Area, FHV, TAB, minThrottle, turbineAreaRatio);
             PushAreaToInlet();
         }
 
-        public void DoEngineFit()
+        public override void DoEngineFit()
         {
             SolverJet jetEngine = engineSolver as SolverJet;
             jetEngine.FitEngine(dryThrust * 1000d, drySFC, wetThrust * 1000d, idleNPR, defaultTPR : defaultTPR);
@@ -398,6 +395,9 @@ namespace AJE
 
         private void SetStaticSimulation()
         {
+            CreateEngineIfNecessary();
+
+            FitEngineIfNecessary();
             ambientTherm = new EngineThermodynamics();
             ambientTherm.FromStandardConditions(true);
 
