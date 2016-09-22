@@ -29,11 +29,16 @@ See AJE or RealFuels for examples of how to implement SolverEngines in practice.
 
 Changelog:
 
+V2.3
+* Revert AssemblyVersion to 2.1.0.0 since latest releases of AJE and RF depend on it
+
+v2.2
+* Recompile against KSP 1.1.3
+
 v2.1
 * Update for KSP 1.1.2
 
 v2.0
-
 * Updated for KSP 1.1
 * Support variable thrust per transform as in ModuleEngines
 
